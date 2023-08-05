@@ -71,8 +71,36 @@ module.exports = {
 
   registerEmployee: (data, callBack) => {
     pool.query(
-      `insert into employees(employee_name,address,telephone_number,password) values(?,?,?,?)`,
-      [data.username, data.address, data.telephone_number, data.password],
+      `insert into employees(employee_name,address,telephone_number,password,verification_status) values(?,?,?,?,?)`,
+      [
+        data.username,
+        data.address,
+        data.telephone_number,
+        data.password,
+        "pending",
+      ],
+      (err, results, fields) => {
+        if (err) return callBack(err);
+        return callBack(null, results);
+      }
+    );
+  },
+
+  verifyEmployee: (data, callBack) => {
+    pool.query(
+      `update employees set verification_status=(?) where employee_id=(?)`,
+      ["verified", data],
+      (err, results, fields) => {
+        if (err) return callBack(err);
+        return callBack(null, results);
+      }
+    );
+  },
+
+  rejectEmployee: (data, callBack) => {
+    pool.query(
+      `delete from employees where employee_id=(?)`,
+      [data],
       (err, results, fields) => {
         if (err) return callBack(err);
         return callBack(null, results);

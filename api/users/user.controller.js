@@ -9,6 +9,8 @@ const {
   // deleteUser,
   // getUserByEmail,
   registerEmployee,
+  verifyEmployee,
+  rejectEmployee,
   registerBus,
   assignCities,
   assignRoutes,
@@ -160,7 +162,55 @@ module.exports = {
       });
     });
   },
+  verifyEmployee: (req, res) => {
+    const id = req.params.id;
 
+    verifyEmployee(id, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: results,
+      });
+    });
+  },
+
+  rejectEmployee: (req, res) => {
+    const id = req.params.id;
+
+    rejectEmployee(id, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: results,
+      });
+    });
+  },
   registerBus: (req, res) => {
     const body = req.body;
 
@@ -216,11 +266,16 @@ module.exports = {
         const user = results[0];
         const pwdMatch = await compare(password, user.password);
 
-        if (pwdMatch) {
+        if (pwdMatch && user.verification_status === "verified") {
           res.status(200).json({
             success: true,
           });
           // res.sendFile(path.join(__dirname, "..", "..", "Site", "index.html"));
+        } else if (pwdMatch && user.verification_status !== "verified") {
+          res.status(401).json({
+            success: false,
+            message: "Not verified",
+          });
         } else {
           res.status(401).json({
             success: false,

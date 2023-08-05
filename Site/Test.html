@@ -84,6 +84,10 @@
 
                 // title.style.display = "block";
                 // title.textContent += username;
+              } else if (jsonRes.message) {
+                invalid.style.display = "block";
+                invalid.style.color = "red";
+                invalid.textContent = "Unverified";
               } else {
                 invalid.style.display = "block";
                 invalid.style.color = "red";

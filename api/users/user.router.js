@@ -15,6 +15,8 @@ const {
   assignCitiesInStages,
 
   registerEmployee,
+  verifyEmployee,
+  rejectEmployee,
   registerBus,
   signIn,
   assignBuses,
@@ -37,6 +39,8 @@ router.post("/stages", assignRouteStages);
 router.post("/citiesinstages", assignCitiesInStages);
 router.post("/signin", signIn);
 router.post("/registerEmployee", registerEmployee);
+router.patch("/verify/:id", verifyEmployee);
+router.delete("/reject/:id", rejectEmployee);
 router.post("/registerBus", registerBus);
 router.post("/assignBus", assignBuses);
 module.exports = router;
