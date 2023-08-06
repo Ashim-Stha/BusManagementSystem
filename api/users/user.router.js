@@ -20,6 +20,14 @@ const {
   registerBus,
   signIn,
   assignBuses,
+
+  getCities,
+  getRoutes,
+  getRouteStages,
+  getCitiesInStages,
+  getBuses,
+  getEmployees,
+  getBusAssignments,
 } = require("./user.controller");
 
 const { verifyToken } = require("../../auth/token_validation");
@@ -38,9 +46,20 @@ router.post("/routes", assignRoutes);
 router.post("/stages", assignRouteStages);
 router.post("/citiesinstages", assignCitiesInStages);
 router.post("/signin", signIn);
+
 router.post("/registerEmployee", registerEmployee);
 router.patch("/verify/:id", verifyEmployee);
 router.delete("/reject/:id", rejectEmployee);
+
 router.post("/registerBus", registerBus);
 router.post("/assignBus", assignBuses);
+
+router.get("/cities", getCities);
+router.get("/routes", getRoutes);
+router.get("/routestages", getRouteStages);
+router.get("/citiesinstages", getCitiesInStages);
+router.get("/buses", getBuses);
+router.get("/employees", getEmployees);
+router.get("/busassignments", getBusAssignments);
+
 module.exports = router;

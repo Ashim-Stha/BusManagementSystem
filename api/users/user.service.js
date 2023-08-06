@@ -128,6 +128,55 @@ module.exports = {
       }
     );
   },
+
+  getCities: (callBack) => {
+    pool.query(`select * from cities`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
+
+  getRoutes: (callBack) => {
+    pool.query(`select * from routes`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
+
+  getRouteStages: (callBack) => {
+    pool.query(`select * from routestages`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
+
+  getCitiesInStages: (callBack) => {
+    pool.query(`select * from citiesinstages`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
+
+  getBuses: (callBack) => {
+    pool.query(`select * from buses`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
+
+  getEmployees: (callBack) => {
+    pool.query(`select * from employees`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
+
+  getBusAssignments: (callBack) => {
+    pool.query(`select * from busassignments`, [], (err, results, fields) => {
+      if (err) return callBack(err);
+      return callBack(null, results);
+    });
+  },
   // getLogin: (callBack) => {
   //   pool.query(`select * from login`, [], (err, results, fields) => {
   //     if (err) return callBack(err);

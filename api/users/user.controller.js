@@ -17,6 +17,13 @@ const {
   assignRouteStages,
   assignCitiesInStages,
   assignBuses,
+  getCities,
+  getRoutes,
+  getRouteStages,
+  getCitiesInStages,
+  getBuses,
+  getEmployees,
+  getBusAssignments,
 } = require("./user.service");
 
 const pool = require("../../config/connectSql");
@@ -284,6 +291,126 @@ module.exports = {
       }
     );
   },
+  getCities: (req, res) => {
+    getCities((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getRoutes: (req, res) => {
+    getRoutes((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getRouteStages: (req, res) => {
+    getRouteStages((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getCitiesInStages: (req, res) => {
+    getCitiesInStages((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getCitiesInStages: (req, res) => {
+    getCitiesInStages((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getBuses: (req, res) => {
+    getBuses((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getEmployees: (req, res) => {
+    getEmployees((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getBusAssignments: (req, res) => {
+    getBusAssignments((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
   // getLogin: (req, res) => {
   //   getLogin((err, results) => {
   //     if (err) {
