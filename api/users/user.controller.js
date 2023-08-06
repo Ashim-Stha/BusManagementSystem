@@ -24,6 +24,8 @@ const {
   getBuses,
   getEmployees,
   getBusAssignments,
+
+  getPendingEmployees,
 } = require("./user.service");
 
 const pool = require("../../config/connectSql");
@@ -398,6 +400,21 @@ module.exports = {
 
   getBusAssignments: (req, res) => {
     getBusAssignments((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Database connection error",
+        });
+      }
+      return res.status(200).json({
+        data: results,
+      });
+    });
+  },
+
+  getPendingEmployees: (req, res) => {
+    getPendingEmployees((err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({

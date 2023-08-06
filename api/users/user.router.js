@@ -28,6 +28,8 @@ const {
   getBuses,
   getEmployees,
   getBusAssignments,
+
+  getPendingEmployees,
 } = require("./user.controller");
 
 const { verifyToken } = require("../../auth/token_validation");
@@ -62,4 +64,5 @@ router.get("/buses", getBuses);
 router.get("/employees", getEmployees);
 router.get("/busassignments", getBusAssignments);
 
+router.get("/pendingEmployees", getPendingEmployees);
 module.exports = router;

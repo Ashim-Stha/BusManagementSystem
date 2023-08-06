@@ -177,6 +177,17 @@ module.exports = {
       return callBack(null, results);
     });
   },
+
+  getPendingEmployees: (callBack) => {
+    pool.query(
+      `select * from employees where verification_status=(?)`,
+      ["pending"],
+      (err, results, fields) => {
+        if (err) return callBack(err);
+        return callBack(null, results);
+      }
+    );
+  },
   // getLogin: (callBack) => {
   //   pool.query(`select * from login`, [], (err, results, fields) => {
   //     if (err) return callBack(err);
