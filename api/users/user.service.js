@@ -158,10 +158,14 @@ module.exports = {
   },
 
   getBuses: (callBack) => {
-    pool.query(`select * from buses`, [], (err, results, fields) => {
-      if (err) return callBack(err);
-      return callBack(null, results);
-    });
+    pool.query(
+      `select b.bus_id,b.bus_registration_number,b.bus_type,c.employee_id,r.route_name from buses as b natural join busassignments as c natural join citiesinstages natural join routestages natural join routes as r`,
+      [],
+      (err, results, fields) => {
+        if (err) return callBack(err);
+        return callBack(null, results);
+      }
+    );
   },
 
   getEmployees: (callBack) => {
