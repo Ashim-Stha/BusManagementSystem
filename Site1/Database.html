@@ -49,7 +49,7 @@
 
             </tr>
           </thead>
-          <tbody>
+          <tbody id="employee">
             <tr scope="row">
               <th scope="row">
                 <!-- <label class="control control--checkbox">
@@ -172,7 +172,7 @@
               <th scope="col">Route</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="bus">
             <tr scope="row">
               <th scope="row">
                 <!-- <label class="control control--checkbox">
@@ -258,8 +258,107 @@
     
 
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> -->
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+        const tableEmployee = document.querySelector("#employee");
+
+        const getUser = async () => {
+          try {
+            const response = await fetch(
+              "http://localhost:3000/api/users/employees",
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+
+            const jsonRes = await response.json();
+            const employees = jsonRes.data;
+
+            // Clear existing table rows
+            tableEmployee.innerHTML = "";
+
+            // Populate table rows with data
+            employees.forEach((employee) => {
+              const row = document.createElement("tr");
+              row.innerHTML = `
+          <td>
+            <label class="control control--checkbox">
+              <input type="checkbox" data-employee-id="${employee.employee_id}" />
+              <div class="control__indicator"></div>
+            </label>
+          </td>
+          <td>${employee.employee_id}</td>
+          <td>${employee.employee_name}</td>
+          <td>${employee.job_title}</td>
+          <td>${employee.telephone_number}</td>
+          <td>${employee.address}</td>
+          <td>${employee.verification_status}</td>
+        `;
+
+              tableEmployee.appendChild(row);
+            });
+          } catch (err) {
+            console.error(err);
+          }
+        };
+
+        // setInterval(() => {
+        //   getUser();
+        // }, 1000);
+
+        getUser();
+
+       const tableBus=document.querySelector('#bus');
+        const getBus=async ()=>{
+
+          try{
+            const response = await fetch(
+              "http://localhost:3000/api/users/buses",
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+
+            const jsonRes = await response.json();
+            const buses = jsonRes.data;
+
+           tableBus.innerHTML="";
+
+
+           buses.forEach((bus)=>{
+            const row=document.createElement('tr')
+           row.innerHTML=`  <td>
+            <label class="control control--checkbox">
+              <input type="checkbox" data-employee-id="${bus.bus_id}" />
+              <div class="control__indicator"></div>
+            </label>
+          </td>
+          <td>${bus.bus_id}</td>
+          <td>${bus.bus_type}</td>
+          <td>${bus.bus_registration_number}</td>
+         <td>${bus.employee_id}</td>
+         <td>${bus.route_name}</td>
+           `
+      tableBus.appendChild(row)
+
+           })
+           
+          }catch(err){
+            console.log(err);
+          }
+        }
+
+        getBus();
+      });
+    </script>
   </body>
 </html>

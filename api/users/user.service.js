@@ -169,10 +169,14 @@ module.exports = {
   },
 
   getEmployees: (callBack) => {
-    pool.query(`select * from employees`, [], (err, results, fields) => {
-      if (err) return callBack(err);
-      return callBack(null, results);
-    });
+    pool.query(
+      `select * from employees where verification_status=(?)`,
+      ["verified"],
+      (err, results, fields) => {
+        if (err) return callBack(err);
+        return callBack(null, results);
+      }
+    );
   },
 
   getBusAssignments: (callBack) => {
